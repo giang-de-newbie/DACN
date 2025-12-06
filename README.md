@@ -131,8 +131,6 @@ DACN/
 │   └── test.py                      # Bộ test case kiểm tra NLP accuracy
 ├── data/                            # Thư mục chứa file database
 │   └── events.db                    # SQLite database (được tạo tự động khi chạy)
-└── docs/                            # Tài liệu bổ sung
-    └── do_an_chuyen_nganh.txt       # Tài liệu yêu cầu / đề tài
 ```
 
 ## Các lưu ý vận hành
