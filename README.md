@@ -95,19 +95,44 @@ python app.py
 python tests/test.py
 ```
 
+## Về Project
+
+Personal Schedule Assistant được phát triển để giải quyết bài toán quản lý lịch trình cá nhân với giao diện tiếng Việt. Thay vì nhập từng trường (sự kiện, thời gian, địa điểm, nhắc nhở), ứng dụng cho phép người dùng nhập dạng tự do như "Nhắc tôi họp nhóm lúc 10h sáng mai ở phòng 302, nhắc trước 15 phút" và tự động trích xuất các thông tin.
+
+Ứng dụng sử dụng một pipeline NLP hybrid gồm 5 thành phần:
+1. **Preprocessor**: chuẩn hóa text, mở rộng viết tắt
+2. **EntityExtractor**: nhận diện thực thể TIME, LOCATION bằng NER (underthesea)
+3. **RuleExtractor**: trích xuất từ khóa sự kiện, nhắc nhở, vị trí bằng regex
+4. **TimeParser**: phân tích thời gian tương đối (mai, trong X phút, thứ 2 tới) và chuẩn hóa
+5. **NLPEngine**: hợp nhất kết quả, kiểm tra tính hợp lệ, tính confidence score
+
+Database sử dụng SQLite với WAL mode để xử lý concurrent access, và hệ thống nhắc nhở chạy trong background thread để kiểm tra sự kiện mỗi 60 giây.
+
 ## Cấu trúc dự án
 
 ```
 DACN/
-├── app.py
-├── config.py
-├── requirements.txt
-├── nlp/
-├── database/
-├── reminder/
-├── ui/
-├── tests/
-└── data/
+├── app.py                           # File khởi động ứng dụng chính
+├── config.py                        # Cấu hình toàn cục (timezone, database path, etc.)
+├── requirements.txt                 # Danh sách Python dependencies
+├── nlp/                             # Module xử lý NLP
+│   ├── preprocessor.py              # Tiền xử lý text (chuẩn hóa, mở rộng viết tắt)
+│   ├── entity_extractor.py          # Nhận diện thực thể (NER) bằng underthesea + regex
+│   ├── rule_extractor.py            # Trích xuất theo rule (từ khóa, nhắc nhở, vị trí)
+│   ├── time_parser.py               # Phân tích thời gian (tương đối & tuyệt đối)
+│   └── nlp_engine.py                # Tích hợp toàn bộ pipeline NLP
+├── database/                        # Module quản lý database
+│   └── db_manager.py                # SQLite CRUD operations, WAL mode
+├── reminder/                        # Module hệ thống nhắc nhở
+│   └── reminder_service.py          # Background thread kiểm tra & phát âm báo
+├── ui/                              # Module giao diện người dùng
+│   └── window.py                    # GUI Tkinter (thêm, sửa, xóa, tìm kiếm sự kiện)
+├── tests/                           # Module kiểm thử
+│   └── test.py                      # Bộ test case kiểm tra NLP accuracy
+├── data/                            # Thư mục chứa file database
+│   └── events.db                    # SQLite database (được tạo tự động khi chạy)
+└── docs/                            # Tài liệu bổ sung
+    └── do_an_chuyen_nganh.txt       # Tài liệu yêu cầu / đề tài
 ```
 
 ## Các lưu ý vận hành
