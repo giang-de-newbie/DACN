@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "input": "Nhắc tôi họp nhóm lúc 10 giờ sáng mai ở phòng 302, nhắc trước 15 phút",
+    "description": "Test đầy đủ tất cả thành phần"
+  },
+  {
+    "id": 2,
+    "input": "Meeting với khách hàng 14:30 thứ Hai tới",
+    "description": "Test thời gian HH:MM và thứ trong tuần"
+  },
+  {
+    "id": 3,
+    "input": "Deadline nộp báo cáo ngày 25/11 lúc 9h",
+    "description": "Test ngày cụ thể DD/MM"
+  },
+  {
+    "id": 4,
+    "input": "Sinh nhật bạn vào chiều Chủ nhật",
+    "description": "Test buổi trong ngày"
+  },
+  {
+    "id": 5,
+    "input": "Họp team 10h30 sáng mai phòng 401, nhắc trước 30 phút",
+    "description": "Test thời gian nhắc 30 phút"
+  },
+  {
+    "id": 6,
+    "input": "Gặp bác sĩ lúc 15:00 ngày mai tại bệnh viện",
+    "description": "Test địa điểm dài"
+  },
+  {
+    "id": 7,
+    "input": "Thi môn toán 8h sáng thứ 5",
+    "description": "Test sự kiện học tập"
+  },
+  {
+    "id": 8,
+    "input": "Party tối thứ Bảy ở nhà Lan",
+    "description": "Test sự kiện vui chơi"
+  },
+  {
+    "id": 9,
+    "input": "Họp phụ huynh 18:30 ngày 20/11 phòng họp",
+    "description": "Test thời gian tối"
+  },
+  {
+    "id": 10,
+    "input": "Đi du lịch Đà Lạt ngày 1/12",
+    "description": "Test sự kiện du lịch"
+  }
+]
