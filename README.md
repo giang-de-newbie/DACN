@@ -1,192 +1,98 @@
 # Personal Schedule Assistant
 
-Ứng dụng quản lý lịch trình cá nhân với tính năng xử lý tiếng Việt tự nhiên (NLP).
-**Status:** Production Ready
-
-## Yêu cầu
-
-- Python 3.8+
-- Windows 10/11 (hoặc tương đương)
-- pip (Python package manager)
-## Cách chạy chương trình
-
-1. Mở PowerShell hoặc Command Prompt và điều hướng đến thư mục dự án:
-
-```powershell
-cd d:\Python\PycharmProjects\DACN
-```
-2. Kích hoạt môi trường ảo (nếu có):
-
-```powershell
-.venv\Scripts\Activate.ps1
-```
-3. Cài dependencies nếu cần:
-
-```powershell
-pip install -r requirements.txt
-```
-4. Chạy ứng dụng chính:
-
-```powershell
-.venv\Scripts\python.exe app.py
-```
-5. Chạy bộ test (tùy chọn):
-
-```powershell
-.venv\Scripts\python.exe tests/test.py
-```
-## Cấu trúc dự án
-
-```
-DACN/
-├── app.py
-├── config.py
-├── requirements.txt
-├── nlp/
-│   ├── preprocessor.py
-│   ├── entity_extractor.py
-│   ├── rule_extractor.py
-│   ├── time_parser.py
-│   └── nlp_engine.py
-├── database/
-│   └── db_manager.py
-├── reminder/
-│   └── reminder_service.py
-├── ui/
-│   └── window.py
-├── tests/
-│   └── test.py
-├── data/
-│   └── events.db (tạo khi chạy)
-└── docs/
-    └── do_an_chuyen_nganh.txt
-```
-## Kiến trúc chính
-
-Ứng dụng sử dụng kiến trúc 5-component cho pipeline NLP:
-
-1. Preprocessor: tiền xử lý và chuẩn hóa văn bản.
-2. EntityExtractor: nhận diện thực thể (TIME, LOCATION) bằng NER và regex.
-3. RuleExtractor: trích xuất theo quy tắc (từ khóa, nhắc nhở, vị trí).
-4. TimeParser: phân tích thời gian (tương đối và tuyệt đối) và chuẩn hóa thành datetime.
-5. NLPEngine: hợp nhất kết quả, kiểm tra tính hợp lệ và xuất cấu trúc sự kiện.
-
-## Tính năng
-
-- Nhập sự kiện bằng tiếng Việt tự do.
-- Trích xuất tự động: tên sự kiện, thời gian, địa điểm, nhắc nhở.
-- Hỗ trợ thời gian tương đối: "trong X phút/giờ nữa".
-- Quản lý sự kiện: Thêm, Sửa, Xóa, Tìm kiếm.
-- Lưu trữ cục bộ bằng SQLite.
-- Hệ thống nhắc nhở tự động.
-- Giao diện GUI đơn giản bằng Tkinter.
-
-## Testing
-
-Dự án có bộ test cơ bản tại `tests/test.py`. Chạy bằng Python như phần hướng dẫn ở trên.
-
-## Lưu ý
-
-- Ứng dụng mặc định sử dụng múi giờ Asia/Ho_Chi_Minh (UTC+7).
-- Trên Windows ứng dụng sử dụng `winsound` để phát âm thanh nhắc nhở; trên Linux/macOS cần điều chỉnh phần âm thanh.
-- Database SQLite được tạo trong thư mục `data/` khi ứng dụng chạy.
-
-## Phiên bản
-
-v1.0
-
----
-
-Được phát triển bởi: Phạm Trà Trường Giang (3121410168)
-# Personal Schedule Assistant# Personal Schedule Assistant
-
-
-
-Ứng dụng quản lý lịch trình cá nhân với tính năng xử lý tiếng Việt tự nhiên (NLP).Ứng dụng quản lý lịch trình cá nhân với tính năng xử lý tiếng Việt tự nhiên (NLP).
-
-
-
-**Status:** Production Ready | **Last Updated:** November 30, 2025
-
-
-
-## Yêu cầu## Yêu cầu
-
-
-
-- Python 3.8+- Python 3.8+
-
-- Windows 10/11- Windows 10/11
-
-- pip (Python package manager)- pip (Python package manager)
-
-
-
-## Cách chạy chương trình## Cách chạy chương trình
-
-
-
-### Bước 1: Mở PowerShell hoặc Command Prompt
-
-
-
-Điều hướng đến thư mục dự án:Điều hướng đến thư mục dự án:
-
-
-
-```powershell```powershell
-
-cd d:\Python\PycharmProjects\DACNcd d:\Python\PycharmProjects\DACN
-
-``````
-
-
-
-### Bước 2: Kích hoạt môi trường ảo (nếu chưa kích hoạt)### Bước 2: Kích hoạt môi trường ảo (nếu chưa kích hoạt)
-
-
-# Personal Schedule Assistant
-
-Ứng dụng quản lý lịch trình cá nhân với tính năng xử lý tiếng Việt tự nhiên (NLP).
+Personal Schedule Assistant là một ứng dụng desktop nhỏ giúp người dùng quản lý lịch cá nhân bằng tiếng Việt. Ứng dụng trích xuất tên sự kiện, thời gian, địa điểm và thiết lập nhắc nhở bằng một pipeline NLP kết hợp rule-based và NER.
 
 **Status:** Production Ready
 
+## Tóm tắt
+
+- Ngôn ngữ: Python 3.8+
+- Mục đích: Quản lý sự kiện & nhắc nhở cá nhân với đầu vào tiếng Việt tự do
+- Giao diện: Tkinter (desktop)
+- Lưu trữ: SQLite (file trong `data/`)
+
+## Tính năng chính
+
+- Nhập sự kiện bằng tiếng Việt tự do
+- Trích xuất: tên sự kiện, thời gian, địa điểm, nhắc nhở
+- Hỗ trợ thời gian tương đối: "trong X phút/giờ nữa"
+- Thêm / Sửa / Xóa / Tìm kiếm sự kiện
+- Hệ thống nhắc nhở chạy nền
+
+## Lấy mã nguồn
+
+Bạn có thể lấy mã nguồn bằng 1 trong 2 cách:
+
+1) Clone bằng Git (khuyến nghị nếu bạn muốn cập nhật dễ dàng):
+
+```bash
+git clone https://github.com/giang-de-newbie/DACN.git
+cd DACN
+```
+
+2) Tải ZIP từ trang GitHub: mở https://github.com/giang-de-newbie/DACN → Code → Download ZIP → giải nén.
+
 ## Yêu cầu
 
-- Python 3.8+
-- Windows 10/11 (hoặc tương đương)
-- pip (Python package manager)
+- Python 3.8 hoặc mới hơn
+- pip
+- (Tùy chọn) Git
 
-## Cách chạy chương trình
+Lưu ý: một số package NLP (ví dụ `underthesea`) có thể cần công cụ biên dịch (build tools). Trên Windows, cài Visual C++ Build Tools nếu cần.
 
-1. Mở PowerShell hoặc Command Prompt và điều hướng đến thư mục dự án:
+## Cài đặt (bước-dần theo mọi hệ điều hành)
+
+Hướng dẫn sau phù hợp cho người dùng Windows/macOS/Linux.
+
+1) Tạo môi trường ảo (khuyến nghị)
+
+Windows PowerShell:
 
 ```powershell
-cd d:\Python\PycharmProjects\DACN
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
 ```
 
-2. Kích hoạt môi trường ảo (nếu có):
+Windows CMD:
 
-```powershell
-.venv\Scripts\Activate.ps1
+```cmd
+python -m venv .venv
+.\.venv\Scripts\activate.bat
 ```
 
-3. Cài dependencies nếu cần:
+macOS / Linux:
 
-```powershell
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+2) Cập nhật pip và cài dependencies
+
+```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-4. Chạy ứng dụng chính:
+3) (Nếu cần) Nếu `underthesea` hoặc package khác báo lỗi biên dịch, cài đặt các build tools tương ứng:
 
-```powershell
-.venv\Scripts\python.exe app.py
+- Windows: Visual C++ Build Tools
+- Ubuntu/Debian: `sudo apt-get install build-essential` + các header Python
+
+## Chạy ứng dụng
+
+Trong môi trường ảo đã kích hoạt:
+
+```bash
+python app.py
 ```
 
-5. Chạy bộ test (tùy chọn):
+Ứng dụng mở cửa sổ GUI để quản lý sự kiện. File database sẽ được tạo tự động trong thư mục `data/`.
 
-```powershell
-.venv\Scripts\python.exe tests/test.py
+## Chạy bộ test cơ bản
+
+```bash
+python tests/test.py
 ```
 
 ## Cấu trúc dự án
@@ -197,71 +103,21 @@ DACN/
 ├── config.py
 ├── requirements.txt
 ├── nlp/
-│   ├── preprocessor.py
-│   ├── entity_extractor.py
-│   ├── rule_extractor.py
-│   ├── time_parser.py
-│   └── nlp_engine.py
 ├── database/
-│   └── db_manager.py
 ├── reminder/
-│   └── reminder_service.py
 ├── ui/
-│   └── window.py
 ├── tests/
-│   └── test.py
-├── data/
-│   └── events.db (tạo khi chạy)
-└── docs/
-    └── do_an_chuyen_nganh.txt
+└── data/
 ```
 
-## Kiến trúc chính
+## Các lưu ý vận hành
 
-Ứng dụng sử dụng kiến trúc 5-component cho pipeline NLP:
+- Mặc định ứng dụng dùng múi giờ Asia/Ho_Chi_Minh (UTC+7). Thay đổi trong `config.py` nếu cần.
+- Trên Windows ứng dụng sử dụng `winsound` để phát âm thanh nhắc nhở; bạn có thể thay đổi phần này nếu chạy trên Linux/macOS.
 
-1. Preprocessor: tiền xử lý và chuẩn hóa văn bản.
-2. EntityExtractor: nhận diện thực thể (TIME, LOCATION) bằng NER và regex.
-3. RuleExtractor: trích xuất theo quy tắc (từ khóa, nhắc nhở, vị trí).
-4. TimeParser: phân tích thời gian (tương đối và tuyệt đối) và chuẩn hóa thành datetime.
-5. NLPEngine: hợp nhất kết quả, kiểm tra tính hợp lệ và xuất cấu trúc sự kiện.
+## Liên hệ
 
-## Tính năng
-
-- Nhập sự kiện bằng tiếng Việt tự do.
-- Trích xuất tự động: tên sự kiện, thời gian, địa điểm, nhắc nhở.
-- Hỗ trợ thời gian tương đối: "trong X phút/giờ nữa".
-- Quản lý sự kiện: Thêm, Sửa, Xóa, Tìm kiếm.
-- Lưu trữ cục bộ bằng SQLite.
-- Hệ thống nhắc nhở tự động.
-- Giao diện GUI đơn giản bằng Tkinter.
-
-## Testing
-
-Dự án có bộ test cơ bản tại `tests/test.py`. Chạy bằng Python như phần hướng dẫn ở trên.
-
-## Lưu ý
-
-- Ứng dụng mặc định sử dụng múi giờ Asia/Ho_Chi_Minh (UTC+7).
-- Trên Windows ứng dụng sử dụng `winsound` để phát âm thanh nhắc nhở; trên Linux/macOS cần điều chỉnh phần âm thanh.
-- Database SQLite được tạo trong thư mục `data/` khi ứng dụng chạy.
-
-## Phiên bản
-
-v1.0
+Phát triển bởi: Phạm Trà Trường Giang — giangphamtratuong@gmail.com
 
 ---
 
-Được phát triển bởi: Phạm Trà Trường Giang (3121410168)
-
-- Để chạy trên Linux/macOS, cần chỉnh sửa phần âm thanh trong `ui/window.py`
-
-- Database SQLite tự động được tạo trong thư mục `data/`---
-
-- Múi giờ mặc định: **Asia/Ho_Chi_Minh (UTC+7)**
-
-Được phát triển như bài báo cáo chuyên ngành.
-
-## Phiên bản hiện tại
-
-**v1.0** - Phiên bản đầy đủ với NLP + UI + Database + Reminder
